@@ -44,14 +44,6 @@ public class AssociationRuleFinder {
 
             while (listit.hasNext()) {
                 List<String> itemlist = listit.next();
-                /*String ps = "";
-
-                for(String s : itemlist)
-                {
-                    ps = ps + s + " ";
-                }
-
-                System.out.println("subset " + ps);*/
 
                 if (itemlist.size() != 0 && itemlist.size() != key.size()) {
                     Iterator<List<String>> listitcopy = generatedsubsetlistcopy.iterator();
@@ -66,9 +58,6 @@ public class AssociationRuleFinder {
                                 rule.add("->");
                                 rule.addAll(itemlistcopy);
 
-                                //itemlist.add("->");
-                                //itemlist.addAll(itemlistcopy);
-
                                 if (!RuleList.contains(rule)) {
                                     RuleList.add(rule);
                                     BodyList.add(itemlist);
@@ -76,20 +65,6 @@ public class AssociationRuleFinder {
                                 }
                             }
 
-
-                            // check if answer is not matching after implementation
-
-
-                            /*if(checkRuleValid(itemlistcopy,itemlist))
-                            {
->>>>>>> Stashed changes
-                                itemlistcopy.add("->");
-                                itemlistcopy.addAll(itemlist);
-
-                                if (!RuleList.contains(itemlistcopy)) {
-                                    RuleList.add(itemlistcopy);
-                                }
-                            }*/
                         }
                     }
 
@@ -99,6 +74,7 @@ public class AssociationRuleFinder {
         }
         System.out.println("The list of generated rules are ");
         System.out.println(RuleList);
+        System.out.println("Number of Rules Generated = " + RuleList.size());
         //System.out.println(BodyList);
         //System.out.println(HeadList);
 

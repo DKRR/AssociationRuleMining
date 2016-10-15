@@ -19,14 +19,12 @@ public class AssociationRuleFinder {
         FrequentItemSetFinder freqItemFinder = new FrequentItemSetFinder();
         List<List<String>> transItemList = freqItemFinder.readGeneDataSet("gene_expression.csv");
         this.combinationMap = finder.frequentItemSetGenerator(0.5, transItemList);
-        //this.combinationMap = testDataMap();
         this.RuleList = new ArrayList<List<String>>();
         this.BodyList = new ArrayList<List<String>>();
         this.HeadList = new ArrayList<List<String>>();
 
     }
 
-    //    public void getAllPossibleAssociationRules(Map<List<String>, Integer> CombinationMap, double Confidence) {
     public void getAllPossibleAssociationRules() {
 
         Iterator<Map.Entry<List<String>, Integer>> iterator = combinationMap.entrySet().iterator();
@@ -102,6 +100,8 @@ public class AssociationRuleFinder {
             }
         }
         System.out.println(RuleList);
+        System.out.println(BodyList);
+        System.out.println(HeadList);
 
         List<String> qstring1 = new ArrayList<String>();
         qstring1.add("G6_UP");
@@ -153,11 +153,11 @@ public class AssociationRuleFinder {
         qstring11.add("G1_UP");
         qstring11.add("G6_UP");
         qstring11.add("G72_UP");
-        samplequerytemplate1("RULE","ANY",qstring11);
+        samplequerytemplate1("RULE", "ANY", qstring11);
 
         samplequerytemplate2("RULE", 3);
-        samplequerytemplate2("BODY",2);
-        samplequerytemplate2("HEAD",2);
+        samplequerytemplate2("BODY", 2);
+        samplequerytemplate2("HEAD", 2);
 
         samplequerytemplate3_1();
         samplequerytemplate3_2();
@@ -224,75 +224,6 @@ public class AssociationRuleFinder {
         }
 
         return false;
-    }
-
-    public Map<List<String>, Integer> testDataMap() {
-        Map<List<String>, Integer> testMap = new HashMap<List<String>, Integer>();
-
-        List<String> testList1 = new ArrayList<String>();
-        List<String> testList2 = new ArrayList<String>();
-        List<String> testList3 = new ArrayList<String>();
-        List<String> testList4 = new ArrayList<String>();
-        List<String> testList5 = new ArrayList<String>();
-        List<String> testList6 = new ArrayList<String>();
-        List<String> testList7 = new ArrayList<String>();
-        List<String> testList8 = new ArrayList<String>();
-        List<String> testList9 = new ArrayList<String>();
-        List<String> testList10 = new ArrayList<String>();
-        List<String> testList11 = new ArrayList<String>();
-        List<String> testList12 = new ArrayList<String>();
-        List<String> testList13 = new ArrayList<String>();
-
-        testList1.add("1");
-        testList2.add("2");
-        testList3.add("3");
-        testList4.add("4");
-        testList5.add("5");
-
-        testList6.add("1");
-        testList6.add("2");
-
-        testList7.add("1");
-        testList7.add("3");
-
-        testList8.add("1");
-        testList8.add("5");
-
-        testList9.add("2");
-        testList9.add("3");
-
-        testList10.add("2");
-        testList10.add("4");
-
-        testList11.add("2");
-        testList11.add("5");
-
-        testList12.add("1");
-        testList12.add("2");
-        testList12.add("3");
-
-        testList13.add("1");
-        testList13.add("2");
-        testList13.add("5");
-
-
-        testMap.put(testList1, 6);
-        testMap.put(testList2, 7);
-        testMap.put(testList3, 6);
-        testMap.put(testList4, 2);
-        testMap.put(testList5, 2);
-
-        testMap.put(testList6, 4);
-        testMap.put(testList7, 4);
-        testMap.put(testList8, 2);
-        testMap.put(testList9, 4);
-        testMap.put(testList10, 2);
-        testMap.put(testList11, 2);
-
-        testMap.put(testList12, 2);
-        testMap.put(testList13, 2);
-
-        return testMap;
     }
 
 
@@ -371,15 +302,20 @@ public class AssociationRuleFinder {
             }
             else if(clause.equals("1"))
             {
+
                 for(int i =0; i < RuleList.size(); i++)
                 {
+                    int flag = 0;
                     for(int j =0; j<genes.size();j++)
                     {
                         if(RuleList.get(i).contains(genes.get(j)))
                         {
-                            count = count + 1;
-                            break;
+                            flag = flag + 1;
                         }
+                    }
+                    if(flag == 1)
+                    {
+                        count = count + 1;
                     }
                 }
             }
@@ -423,13 +359,17 @@ public class AssociationRuleFinder {
             {
                 for(int i =0; i < BodyList.size(); i++)
                 {
+                    int flag = 0;
                     for(int j =0; j<genes.size();j++)
                     {
                         if(BodyList.get(i).contains(genes.get(j)))
                         {
-                            count = count + 1;
-                            break;
+                            flag = flag + 1;
                         }
+                    }
+                    if(flag == 1)
+                    {
+                        count = count + 1;
                     }
                 }
             }
@@ -474,13 +414,17 @@ public class AssociationRuleFinder {
             {
                 for(int i =0; i < HeadList.size(); i++)
                 {
+                    int flag = 0;
                     for(int j =0; j<genes.size();j++)
                     {
                         if(HeadList.get(i).contains(genes.get(j)))
                         {
-                            count = count + 1;
-                            break;
+                            flag = flag + 1;
                         }
+                    }
+                    if(flag == 1)
+                    {
+                        count = count + 1;
                     }
                 }
             }
@@ -554,15 +498,22 @@ public class AssociationRuleFinder {
     public void samplequerytemplate3_2()
     {
         int count = 0;
-        int flag1 = 0;
-        //int flag2 = 0;
 
         for(int i =0; i<BodyList.size();i++)
         {
-            if(BodyList.get(i).contains("G1_UP") || HeadList.get(i).contains("G6_UP"))
+            int flag1 = 0;
+            if(BodyList.get(i).contains("G1_UP"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if(HeadList.get(i).contains("G6_UP"))
+            {
+                flag1 = flag1 + 1;
+            }
+
+            if(flag1 == 1 || flag1 == 2)
             {
                 count = count + 1;
-                break;
             }
         }
 
@@ -576,12 +527,22 @@ public class AssociationRuleFinder {
 
         for(int i =0; i<BodyList.size();i++)
         {
+            int flag = 0;
             if(BodyList.get(i).contains("G1_UP"))
             {
+                flag = flag + 1;
+            }
+            if(HeadList.get(i).contains("G6_UP"))
+            {
+
+            }
+
+            if(flag == 1)
+            {
                 count = count + 1;
-                break;
             }
         }
+
 
         System.out.println("The number of rules that satisfy the query3template are " + count);
     }
@@ -595,7 +556,6 @@ public class AssociationRuleFinder {
             if(HeadList.get(i).contains("G1_UP") && (!BodyList.get(i).contains("AML")) && (!BodyList.get(i).contains("ALL")) && (!BodyList.get(i).contains("Breast Cancer")) && (!BodyList.get(i).contains("Colon Cancer")))
             {
                 count = count + 1;
-                break;
             }
         }
 

@@ -3,7 +3,7 @@
  */
 public class RunPart2 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         AssociationRuleFinder assfinder = new AssociationRuleFinder();
         assfinder.getAllPossibleAssociationRules();

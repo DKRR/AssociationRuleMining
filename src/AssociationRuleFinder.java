@@ -7,23 +7,28 @@ public class AssociationRuleFinder {
 
     public Map<List<String>, Integer> combinationMap;
     public Map<List<String>, Integer> combinationMapReplica;
-    public Map<List<String>, List<String>> tempRuleMap;
-    public Map<List<String>, List<String>> finalRuleMap;
-    public Map<List<String>, List<String>> sanitzedTempRuleMapReplica;
+    //public Map<List<String>, List<String>> tempRuleMap;
+    //public Map<List<String>, List<String>> finalRuleMap;
+    //public Map<List<String>, List<String>> sanitzedTempRuleMapReplica;
     public List<List<String>> RuleList;
 
     double confidenceval = 0.7;
 
-    public AssociationRuleFinder() {
+    public AssociationRuleFinder() throws Exception{
 
         FrequentItemSetFinder finder = new FrequentItemSetFinder();
         //this.combinationMap = finder.getCombinationMap();
-        this.combinationMap = testDataMap();
-        this.tempRuleMap = new HashMap<List<String>, List<String>>();
-        this.finalRuleMap = new HashMap<List<String>, List<String>>();
-        this.sanitzedTempRuleMapReplica = new HashMap<List<String>, List<String>>();
+
+        FrequentItemSetFinder freqItemFinder = new FrequentItemSetFinder();
+        List<List<String>> transItemList = freqItemFinder.readGeneDataSet("gene_expression.csv");
+        //freqItemFinder.frequentItemSetGenerator(0.3, transItemList);
+
+        this.combinationMap = finder.frequentItemSetGenerator(0.7, transItemList);
+
+
+        //this.sanitzedTempRuleMapReplica = new HashMap<List<String>, List<String>>();
         //this.combinationMapReplica = finder.getCombinationMap();
-        this.combinationMapReplica = testDataMap();
+        //this.combinationMapReplica = new HashMap<List<String>, Integer>();
         this.RuleList = new ArrayList<List<String>>();
 
     }
@@ -166,7 +171,7 @@ public class AssociationRuleFinder {
         System.out.println(RuleList);
     }
 
-    public void santizedTempRuleMap() {
+    /*public void santizedTempRuleMap() {
 
         Iterator<Map.Entry<List<String>, List<String>>> templistiterator = tempRuleMap.entrySet().iterator();
         //Set<Map.Entry<List<String>,List<String>>> entrySet = tempRuleMap.entrySet();
@@ -195,7 +200,7 @@ public class AssociationRuleFinder {
 
         }
 
-    }
+    }*/
 
     public double findconfidence(List<String> lhsstring,List<String> rhsstring)
     {
@@ -215,7 +220,7 @@ public class AssociationRuleFinder {
 
     }
 
-    public void finalRuleGenerator()
+    /*public void finalRuleGenerator()
     {
         Iterator<Map.Entry<List<String>,List<String>>> finalRuleIterator = sanitzedTempRuleMapReplica.entrySet().iterator();
 
@@ -233,7 +238,7 @@ public class AssociationRuleFinder {
                 finalRuleMap.put(finallhs,finalrhs);
             }
         }
-    }
+    }*/
 
     public List<List<String>> generateSubset(List<String> powerset)
     {

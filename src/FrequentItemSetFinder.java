@@ -10,7 +10,14 @@ import java.util.Map.Entry;
  */
 public class FrequentItemSetFinder {
 
-    public static Map<List<String>, Integer> allFrequenItemSets = new TreeMap<List<String>, Integer>();
+    public static Map<List<String>, Integer> allFrequenItemSets =  new TreeMap<List<String>, Integer>(new Comparator<List<String>>() {
+        @Override
+        public int compare(List<String> o1, List<String> o2) {
+            Collections.sort(o1);
+            Collections.sort(o2);
+            return o1.get(0).compareTo(o2.get(0));
+        }
+    });
     public double[] supportValues = new double[]{0.3, 0.4, 0.5, 0.6, 0.7};
 
     //read source file and generate itemset list

@@ -12,7 +12,7 @@ public class AssociationRuleFinder {
     //public Map<List<String>, List<String>> sanitzedTempRuleMapReplica;
     public List<List<String>> RuleList;
 
-    double confidenceval = 0.7;
+    double confidenceval = 0.6;
 
     public AssociationRuleFinder() throws Exception{
 
@@ -23,7 +23,7 @@ public class AssociationRuleFinder {
         List<List<String>> transItemList = freqItemFinder.readGeneDataSet("gene_expression.csv");
         //freqItemFinder.frequentItemSetGenerator(0.3, transItemList);
 
-        this.combinationMap = finder.frequentItemSetGenerator(0.7, transItemList);
+        this.combinationMap = finder.frequentItemSetGenerator(0.5, transItemList);
 
 
         //this.sanitzedTempRuleMapReplica = new HashMap<List<String>, List<String>>();
@@ -280,7 +280,7 @@ public class AssociationRuleFinder {
         if(flag == 0)
         {
             double confvalue = findconfidence(checklhs,checkrhs);
-            if(confvalue > confidenceval)
+            if(confvalue >= confidenceval)
             {
                 return true;
             }

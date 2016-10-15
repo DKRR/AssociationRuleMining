@@ -117,11 +117,11 @@ public class AssociationRuleFinder {
         samplequerytemplate1("RULE", "1", qstring3);
 
         List<String> qstring4 = new ArrayList<String>();
-        qstring4.add("G1_UP");
+        qstring4.add("G6_UP");
         samplequerytemplate1("BODY", "ANY", qstring4);
 
         List<String> qstring5 = new ArrayList<String>();
-        qstring4.add("G72_UP");
+        qstring5.add("G72_UP");
         samplequerytemplate1("BODY", "NONE", qstring5);
 
         List<String> qstring6 = new ArrayList<String>();

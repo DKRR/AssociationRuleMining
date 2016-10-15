@@ -10,14 +10,7 @@ import java.util.Map.Entry;
  */
 public class FrequentItemSetFinder {
 
-    public static Map<List<String>, Integer> allFrequenItemSets =  new TreeMap<List<String>, Integer>(new Comparator<List<String>>() {
-        @Override
-        public int compare(List<String> o1, List<String> o2) {
-            Collections.sort(o1);
-            Collections.sort(o2);
-            return o1.get(0).compareTo(o2.get(0));
-        }
-    });
+    public Map<List<String>, Integer> allFrequenItemSets = new HashMap<List<String>, Integer>();
     public double[] supportValues = new double[]{0.3, 0.4, 0.5, 0.6, 0.7};
 
     //read source file and generate itemset list
@@ -45,7 +38,7 @@ public class FrequentItemSetFinder {
     }
 
     public Map<List<String>, Integer> frequentItemSetGenerator(double threshold, List<List<String>> transItemsList) {
-        Map<String, Integer> itemCount = new TreeMap<String, Integer>();
+        Map<String, Integer> itemCount = new HashMap<String, Integer>();
         for (int i = 0; i < transItemsList.size(); i++) {
             List<String> transItems = transItemsList.get(i);
             for (String transItem : transItems) {
@@ -56,14 +49,7 @@ public class FrequentItemSetFinder {
                 }
             }
         }
-        Map<List<String>, Integer> candidateItems = new TreeMap<List<String>, Integer>(new Comparator<List<String>>() {
-            @Override
-            public int compare(List<String> o1, List<String> o2) {
-                Collections.sort(o1);
-                Collections.sort(o2);
-                return o1.get(0).compareTo(o2.get(0));
-            }
-        });
+        Map<List<String>, Integer> candidateItems = new HashMap<List<String>, Integer>();
         for (Entry<String, Integer> entry : itemCount.entrySet()) {
             List<String> itemSet = new ArrayList<String>();
             itemSet.add(entry.getKey());
@@ -73,7 +59,7 @@ public class FrequentItemSetFinder {
         System.out.println("Support is set to be " + threshold * 100 + "%");
         while (candidateItems.size() > 0) {
             System.out.println("Running length-" + count + " frequent itemset");
-            Map<List<String>, Integer> frequentItemSets = null;
+            Map<List<String>, Integer> frequentItemSets = new HashMap<List<String>, Integer>();
             if (count == 1) {
                 frequentItemSets = findFrequentItemSets(threshold, candidateItems, transItemsList.size());
             } else {

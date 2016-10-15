@@ -10,6 +10,6 @@ public class RunPart1 {
 
         FrequentItemSetFinder freqItemFinder = new FrequentItemSetFinder();
         List<List<String>> transItemList = freqItemFinder.readGeneDataSet("gene_expression.csv");
-        freqItemFinder.frequentItemSetGenerator(0.3, transItemList);
+        freqItemFinder.frequentItemSetGenerator(0.4, transItemList);
     }
 }

@@ -14,7 +14,7 @@ public class AssociationRuleFinder {
 
     double confidenceval = 0.6;
 
-    public AssociationRuleFinder() throws Exception{
+    public AssociationRuleFinder() throws Exception {
 
         FrequentItemSetFinder finder = new FrequentItemSetFinder();
         //this.combinationMap = finder.getCombinationMap();
@@ -33,7 +33,7 @@ public class AssociationRuleFinder {
 
     }
 
-//    public void getAllPossibleAssociationRules(Map<List<String>, Integer> CombinationMap, double Confidence) {
+    //    public void getAllPossibleAssociationRules(Map<List<String>, Integer> CombinationMap, double Confidence) {
     public void getAllPossibleAssociationRules() {
 
         Iterator<Map.Entry<List<String>, Integer>> iterator = combinationMap.entrySet().iterator();
@@ -50,8 +50,7 @@ public class AssociationRuleFinder {
 
             Iterator<List<String>> listit = generatedsubsetlist.iterator();
 
-            while (listit.hasNext())
-            {
+            while (listit.hasNext()) {
                 List<String> itemlist = listit.next();
                 /*String ps = "";
 
@@ -62,32 +61,25 @@ public class AssociationRuleFinder {
 
                 System.out.println("subset " + ps);*/
 
-                if(itemlist.size()!=0 && itemlist.size()!=key.size())
-                {
+                if (itemlist.size() != 0 && itemlist.size() != key.size()) {
                     Iterator<List<String>> listitcopy = generatedsubsetlistcopy.iterator();
 
-                    while(listitcopy.hasNext())
-                    {
+                    while (listitcopy.hasNext()) {
                         List<String> itemlistcopy = listitcopy.next();
-                        if(itemlistcopy.size()!=0 && itemlistcopy.size()!=key.size())
-                        {
-                            if(checkRuleValid(itemlist,itemlistcopy))
-                            {
+                        if (itemlistcopy.size() != 0 && itemlistcopy.size() != key.size()) {
+                            if (checkRuleValid(itemlist, itemlistcopy)) {
                                 itemlist.add("->");
                                 itemlist.addAll(itemlistcopy);
 
-                                if(!RuleList.contains(itemlist))
-                                {
+                                if (!RuleList.contains(itemlist)) {
                                     RuleList.add(itemlist);
                                 }
                             }
-                            if(checkRuleValid(itemlistcopy,itemlist))
-                            {
+                            if (checkRuleValid(itemlistcopy, itemlist)) {
                                 itemlistcopy.add("->");
                                 itemlistcopy.addAll(itemlist);
 
-                                if(!RuleList.contains(itemlistcopy))
-                                {
+                                if (!RuleList.contains(itemlistcopy)) {
                                     RuleList.add(itemlistcopy);
                                 }
                             }
@@ -202,8 +194,7 @@ public class AssociationRuleFinder {
 
     }*/
 
-    public double findconfidence(List<String> lhsstring,List<String> rhsstring)
-    {
+    public double findconfidence(List<String> lhsstring, List<String> rhsstring) {
         int lhssup = combinationMap.get(lhsstring);
         int rhssup = combinationMap.get(rhsstring);
 
@@ -214,7 +205,7 @@ public class AssociationRuleFinder {
 
         int unionsup = combinationMap.get(tempunionlist);
 
-        double confval = unionsup/lhssup;
+        double confval = unionsup / lhssup;
 
         return confval;
 
@@ -240,19 +231,16 @@ public class AssociationRuleFinder {
         }
     }*/
 
-    public List<List<String>> generateSubset(List<String> powerset)
-    {
+    public List<List<String>> generateSubset(List<String> powerset) {
         List<List<String>> subsets = new ArrayList<List<String>>();
-        if(powerset.isEmpty())
-        {
+        if (powerset.isEmpty()) {
             subsets.add(new ArrayList<String>());
             return subsets;
         }
 
         String head = powerset.get(0);
-        List<String> rest = new ArrayList<String>(powerset.subList(1,powerset.size()));
-        for(List<String> sublist : generateSubset(rest))
-        {
+        List<String> rest = new ArrayList<String>(powerset.subList(1, powerset.size()));
+        for (List<String> sublist : generateSubset(rest)) {
             List<String> newlist = new ArrayList<String>();
             newlist.add(head);
             newlist.addAll(sublist);
@@ -264,24 +252,19 @@ public class AssociationRuleFinder {
 
     }
 
-    public boolean checkRuleValid(List<String> checklhs,List<String> checkrhs)
-    {
-        int flag =0;
+    public boolean checkRuleValid(List<String> checklhs, List<String> checkrhs) {
+        int flag = 0;
 
-        for(String lhsitem : checklhs)
-        {
-            if(checkrhs.contains(lhsitem))
-            {
+        for (String lhsitem : checklhs) {
+            if (checkrhs.contains(lhsitem)) {
                 flag = 1;
                 break;
             }
         }
 
-        if(flag == 0)
-        {
-            double confvalue = findconfidence(checklhs,checkrhs);
-            if(confvalue >= confidenceval)
-            {
+        if (flag == 0) {
+            double confvalue = findconfidence(checklhs, checkrhs);
+            if (confvalue >= confidenceval) {
                 return true;
             }
         }
@@ -289,9 +272,8 @@ public class AssociationRuleFinder {
         return false;
     }
 
-    public Map<List<String>,Integer> testDataMap()
-    {
-        Map<List<String>,Integer> testMap = new HashMap<List<String>, Integer>();
+    public Map<List<String>, Integer> testDataMap() {
+        Map<List<String>, Integer> testMap = new HashMap<List<String>, Integer>();
 
         List<String> testList1 = new ArrayList<String>();
         List<String> testList2 = new ArrayList<String>();
@@ -346,15 +328,15 @@ public class AssociationRuleFinder {
         testMap.put(testList4, 2);
         testMap.put(testList5, 2);
 
-        testMap.put(testList6,4);
-        testMap.put(testList7,4);
-        testMap.put(testList8,2);
-        testMap.put(testList9,4);
-        testMap.put(testList10,2);
-        testMap.put(testList11,2);
+        testMap.put(testList6, 4);
+        testMap.put(testList7, 4);
+        testMap.put(testList8, 2);
+        testMap.put(testList9, 4);
+        testMap.put(testList10, 2);
+        testMap.put(testList11, 2);
 
-        testMap.put(testList12,2);
-        testMap.put(testList13,2);
+        testMap.put(testList12, 2);
+        testMap.put(testList13, 2);
 
         return testMap;
     }

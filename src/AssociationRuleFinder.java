@@ -553,7 +553,7 @@ public class AssociationRuleFinder {
 
         for(int i =0; i<BodyList.size();i++)
         {
-            if(HeadList.get(i).contains("G1_UP") && (!BodyList.get(i).contains("AML")) && (!BodyList.get(i).contains("ALL")) && (!BodyList.get(i).contains("Breast Cancer")) && (!BodyList.get(i).contains("Colon Cancer")))
+            if(HeadList.get(i).contains("G1_UP") && ((!BodyList.get(i).contains("AML")) || (!BodyList.get(i).contains("ALL")) || (!BodyList.get(i).contains("Breast Cancer")) || (!BodyList.get(i).contains("Colon Cancer"))))
             {
                 count = count + 1;
             }

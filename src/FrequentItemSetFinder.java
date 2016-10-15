@@ -11,8 +11,6 @@ import java.util.Map.Entry;
 public class FrequentItemSetFinder {
 
     public Map<List<String>, Integer> allFrequenItemSets = new HashMap<List<String>, Integer>();
-    public double[] supportValues = new double[]{0.3, 0.4, 0.5, 0.6, 0.7};
-
     //read source file and generate itemset list
     public List<List<String>> readGeneDataSet(String path) throws FileNotFoundException {
         List<List<String>> transItemsList = new ArrayList<List<String>>();

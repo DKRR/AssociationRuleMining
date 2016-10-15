@@ -99,70 +99,73 @@ public class AssociationRuleFinder {
                 }
             }
         }
+        System.out.println("The list of generated rules are ");
         System.out.println(RuleList);
-        System.out.println(BodyList);
-        System.out.println(HeadList);
+        //System.out.println(BodyList);
+        //System.out.println(HeadList);
 
         List<String> qstring1 = new ArrayList<String>();
         qstring1.add("G6_UP");
-        samplequerytemplate1("RULE", "ANY", qstring1);
+        samplequerytemplate1("RULE", "ANY", qstring1, "Template1-Query1");
 
         List<String> qstring2 = new ArrayList<String>();
         qstring2.add("G1_UP");
-        samplequerytemplate1("RULE", "1", qstring2);
+        samplequerytemplate1("RULE", "1", qstring2, "Template1-Query2");
 
         List<String> qstring3 = new ArrayList<String>();
         qstring3.add("G1_UP");
         qstring3.add("G10_Down");
-        samplequerytemplate1("RULE", "1", qstring3);
+        samplequerytemplate1("RULE", "1", qstring3, "Template1-Query3");
 
         List<String> qstring4 = new ArrayList<String>();
         qstring4.add("G6_UP");
-        samplequerytemplate1("BODY", "ANY", qstring4);
+        samplequerytemplate1("BODY", "ANY", qstring4, "Template1-Query4");
 
         List<String> qstring5 = new ArrayList<String>();
         qstring5.add("G72_UP");
-        samplequerytemplate1("BODY", "NONE", qstring5);
+        samplequerytemplate1("BODY", "NONE", qstring5, "Template1-Query5");
 
         List<String> qstring6 = new ArrayList<String>();
         qstring6.add("G1_UP");
         qstring6.add("G10_Down");
-        samplequerytemplate1("BODY", "1", qstring6);
+        samplequerytemplate1("BODY", "1", qstring6, "Template1-Query6");
 
         List<String> qstring7 = new ArrayList<String>();
         qstring7.add("G6_UP");
-        samplequerytemplate1("HEAD", "ANY", qstring7);
+        samplequerytemplate1("HEAD", "ANY", qstring7, "Template1-Query7");
 
         List<String> qstring8 = new ArrayList<String>();
         qstring8.add("G1_UP");
         qstring8.add("G6_UP");
-        samplequerytemplate1("HEAD", "NONE", qstring8);
+        samplequerytemplate1("HEAD", "NONE", qstring8, "Template1-Query8");
 
         List<String> qstring9 = new ArrayList<String>();
         qstring9.add("G6_UP");
         qstring9.add("G8_UP");
-        samplequerytemplate1("HEAD", "1", qstring9);
+        samplequerytemplate1("HEAD", "1", qstring9, "Template1-Query9");
 
         List<String> qstring10 = new ArrayList<String>();
         qstring10.add("G1_UP");
         qstring10.add("G6_UP");
         qstring10.add("G72_UP");
-        samplequerytemplate1("RULE","1",qstring10);
+        samplequerytemplate1("RULE","1",qstring10, "Template1-Query10");
 
         List<String> qstring11 = new ArrayList<String>();
         qstring11.add("G1_UP");
         qstring11.add("G6_UP");
         qstring11.add("G72_UP");
-        samplequerytemplate1("RULE", "ANY", qstring11);
+        samplequerytemplate1("RULE", "ANY", qstring11, "Template1-Query11");
 
-        samplequerytemplate2("RULE", 3);
-        samplequerytemplate2("BODY", 2);
-        samplequerytemplate2("HEAD", 2);
+        samplequerytemplate2("RULE", 3,"Template2-Query1");
+        samplequerytemplate2("BODY", 2,"Template2-Query2");
+        samplequerytemplate2("HEAD", 2,"Template2-Query3");
 
         samplequerytemplate3_1();
         samplequerytemplate3_2();
         samplequerytemplate3_3();
         samplequerytemplate3_4();
+        samplequerytemplate3_5();
+        samplequerytemplate3_6();
 
     }
 
@@ -261,7 +264,7 @@ public class AssociationRuleFinder {
 
     }
 
-    public void samplequerytemplate1(String part1, String clause, List<String> genes)
+    public void samplequerytemplate1(String part1, String clause, List<String> genes, String query)
     {
         int count = 0;
 
@@ -430,11 +433,11 @@ public class AssociationRuleFinder {
             }
         }
 
-        System.out.println("The number of rules that satisfy the querytemplate1 are " + count);
+        System.out.println( query+ " Number of generated rules = " + count);
 
     }
 
-    public void samplequerytemplate2(String part1, int counter)
+    public void samplequerytemplate2(String part1, int counter, String query)
     {
         int count = 0;
         int checker = 0;
@@ -474,7 +477,7 @@ public class AssociationRuleFinder {
             }
         }
 
-        System.out.println("The number of rules that satisfy the query2template are " + count);
+        System.out.println(query +" Number of generated rules = "+ count);
     }
 
     public void samplequerytemplate3_1()
@@ -492,7 +495,7 @@ public class AssociationRuleFinder {
             }
         }
 
-        System.out.println("The number of rules that satisfy the query3template are " + count);
+        System.out.println("Template3-Query1 Number of generated rules = " + count);
     }
 
     public void samplequerytemplate3_2()
@@ -517,10 +520,9 @@ public class AssociationRuleFinder {
             }
         }
 
-        System.out.println("The number of rules that satisfy the query3template are " + count);
+        System.out.println("Template3-Query2 Number of generated rules = " + count);
     }
 
-    //need to handle 2 of g6 up part.
     public void samplequerytemplate3_3()
     {
         int count = 0;
@@ -532,19 +534,19 @@ public class AssociationRuleFinder {
             {
                 flag = flag + 1;
             }
-            if(HeadList.get(i).contains("G6_UP"))
+            if(Collections.frequency(HeadList.get(i),"G6_UP")==2)
             {
-
+                flag = flag + 1;
             }
 
-            if(flag == 1)
+            if(flag == 1 || flag == 2)
             {
                 count = count + 1;
             }
         }
 
 
-        System.out.println("The number of rules that satisfy the query3template are " + count);
+        System.out.println("Template3-Query3 Number of generated rules = " + count);
     }
 
     public void samplequerytemplate3_4()
@@ -559,6 +561,79 @@ public class AssociationRuleFinder {
             }
         }
 
-        System.out.println("The number of rules that satisfy the query3template are " + count);
+        System.out.println("Template3-Query4 Number of generated rules = " + count);
+    }
+
+    public void samplequerytemplate3_5()
+    {
+        int count = 0;
+
+        for(int i =0; i<BodyList.size();i++)
+        {
+            int flag1 = 0;
+            int flag2 = 0;
+            if(HeadList.get(i).contains("AML"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if(HeadList.get(i).contains("ALL"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if(HeadList.get(i).contains("Breast Cancer"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if(HeadList.get(i).contains("Colon Cancer"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if(RuleList.get(i).contains("G72_UP"))
+            {
+                flag2 = flag2 + 1;
+            }
+            if(RuleList.get(i).contains("G96_Down"))
+            {
+                flag2 = flag2 + 1;
+            }
+
+            if(flag1 == 1 || flag2 == 1)
+            {
+                count = count + 1;
+            }
+
+        }
+
+        System.out.println("Template3-Query5 Number of generated rules = " + count);
+    }
+
+    public void samplequerytemplate3_6()
+    {
+        int count = 0;
+
+        for(int i=0;i<BodyList.size();i++)
+        {
+            int flag1 = 0;
+            int flag2 = 0;
+            if(BodyList.get(i).contains("G59_UP"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if(BodyList.get(i).contains("G96_Down"))
+            {
+                flag1 = flag1 + 1;
+            }
+            if((RuleList.get(i).size()-1) >=3 )
+            {
+                flag2 = flag2 + 1;
+            }
+
+            if(flag1 == 1 && flag2 == 1)
+            {
+                count = count + 1;
+            }
+        }
+
+        System.out.println("Template3-Query6 Number of generated rules = " + count);
     }
 }

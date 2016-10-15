@@ -9,7 +9,7 @@ public class RunPart1 {
     public static void main(String[] args) throws FileNotFoundException {
 
         FrequentItemSetFinder freqItemFinder = new FrequentItemSetFinder();
-        List<String[]> transItemList = freqItemFinder.readGeneDataSet("gene_expression.csv");
-        freqItemFinder.frequentItemSetGenerator(0.2, transItemList);
+        List<List<String>> transItemList = freqItemFinder.readGeneDataSet("gene_expression.csv");
+        freqItemFinder.frequentItemSetGenerator(0.3, transItemList);
     }
 }
